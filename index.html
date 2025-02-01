@@ -23,30 +23,16 @@
 </head>
 <body>
     <div class="container">
-        <h2>Meine Linksammlun</h2>
+        <h2>Meine Linksammlung</h2>
         
-        <div class="link-box">
-            <label for="beschreibung1">Beschreibung:</label>
-            <input type="text" id="beschreibung1" placeholder="Gib eine Beschreibung ein" style="width: 100%;">
-            <br>
-            <label for="link1">Link:</label>
-            <input type="url" id="link1" placeholder="https://example.com" style="width: 100%;">
-        </div>
-        
-        <div class="link-box">
-            <label for="beschreibung2">Beschreibung:</label>
-            <input type="text" id="beschreibung2" placeholder="Gib eine Beschreibung ein" style="width: 100%;">
-            <br>
-            <label for="link2">Link:</label>
-            <input type="url" id="link2" placeholder="https://example.com" style="width: 100%;">
-        </div>
+        <div id="links-container"></div>
         
         <button onclick="addField()">Neues Feld hinzufügen</button>
     </div>
 
     <script>
         function addField() {
-            const container = document.querySelector('.container');
+            const container = document.getElementById('links-container');
             const newBox = document.createElement('div');
             newBox.classList.add('link-box');
             newBox.innerHTML = `
@@ -55,10 +41,24 @@
                 <br>
                 <label>Link:</label>
                 <input type="url" placeholder="https://example.com" style="width: 100%;">
+                <br>
+                <button onclick="saveField(this)">Bestätigen</button>
             `;
             container.appendChild(newBox);
+        }
+
+        function saveField(button) {
+            const box = button.parentElement;
+            const inputs = box.querySelectorAll('input');
+            const description = inputs[0].value;
+            const link = inputs[1].value;
+            
+            if (description && link) {
+                box.innerHTML = `<p><strong>${description}</strong></p><p><a href="${link}" target="_blank">${link}</a></p>`;
+            } else {
+                alert('Bitte Beschreibung und Link eingeben.');
+            }
         }
     </script>
 </body>
 </html>
-
