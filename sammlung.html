@@ -19,6 +19,9 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+        input {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -31,6 +34,10 @@
     </div>
 
     <script>
+        function escapeHTML(str) {
+            return str.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
         function addField() {
             const container = document.getElementById('links-container');
             const newBox = document.createElement('div');
@@ -50,10 +57,12 @@
         function saveField(button) {
             const box = button.parentElement;
             const inputs = box.querySelectorAll('input');
-            const description = inputs[0].value;
-            const link = inputs[1].value;
+            let description = inputs[0].value;
+            let link = inputs[1].value;
             
             if (description && link) {
+                description = escapeHTML(description);
+                link = escapeHTML(link);
                 box.innerHTML = `<p><strong>${description}</strong></p><p><a href="${link}" target="_blank">${link}</a></p>`;
             } else {
                 alert('Bitte Beschreibung und Link eingeben.');
