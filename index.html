@@ -1,1 +1,64 @@
-hallo ich hab eine website
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Sammlung</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .link-box {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Meine Linksammlung</h2>
+        
+        <div class="link-box">
+            <label for="beschreibung1">Beschreibung:</label>
+            <input type="text" id="beschreibung1" placeholder="Gib eine Beschreibung ein" style="width: 100%;">
+            <br>
+            <label for="link1">Link:</label>
+            <input type="url" id="link1" placeholder="https://example.com" style="width: 100%;">
+        </div>
+        
+        <div class="link-box">
+            <label for="beschreibung2">Beschreibung:</label>
+            <input type="text" id="beschreibung2" placeholder="Gib eine Beschreibung ein" style="width: 100%;">
+            <br>
+            <label for="link2">Link:</label>
+            <input type="url" id="link2" placeholder="https://example.com" style="width: 100%;">
+        </div>
+        
+        <button onclick="addField()">Neues Feld hinzufügen</button>
+    </div>
+
+    <script>
+        function addField() {
+            const container = document.querySelector('.container');
+            const newBox = document.createElement('div');
+            newBox.classList.add('link-box');
+            newBox.innerHTML = `
+                <label>Beschreibung:</label>
+                <input type="text" placeholder="Gib eine Beschreibung ein" style="width: 100%;">
+                <br>
+                <label>Link:</label>
+                <input type="url" placeholder="https://example.com" style="width: 100%;">
+            `;
+            container.appendChild(newBox);
+        }
+    </script>
+</body>
+</html>
+
